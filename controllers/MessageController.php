@@ -60,6 +60,8 @@ class MessageController {
     public static function appointmentEditInfo(string $step) {
         if ('welcome' === $step) {
             echo 'When prompted, please provide the information only if you want to input new information, otherwise just click enter.' . "\r\n";
+        } elseif ('id' === $step) {
+            echo 'Please enter the ID of the entry you wish to edit.' . "\r\n";
         } elseif ('name' === $step) {
             echo '1. Name and Surname' . "\r\n";
         } elseif ('email' === $step) {

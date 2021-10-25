@@ -93,7 +93,43 @@ class AppointmentController {
 
     public static function update() {
         $DB = DatabaseController::get();
-        
+        MessageController::appointmentEditInfo('welcome');
+        MessageController::appointmentEditInfo('id');
+        $wantedID = readline('Input id: ');
+        $entry = $DB->getAppByID($wantedID);
+        MessageController::appointmentEditInfo('name');
+        $name = readline('Input new name: ');
+        if ('' != $name) {
+            $entry['name'] = $name;
+        }
+        MessageController::appointmentEditInfo('email');
+        $email = readline('Input new email: ');
+        if ('' != $email) {
+            $entry['email'] = $email;
+        }
+        MessageController::appointmentEditInfo('phone');
+        $phone = readline('Input new phone number: ');
+        if ('' != $phone) {
+            $entry['phone'] = $phone;
+        }
+        MessageController::appointmentEditInfo('natID');
+        $natID = readline('Input new ID number: ');
+        if ('' != $natID) {
+            $entry['natID'] = $natID;
+        }
+        MessageController::appointmentEditInfo('date');
+        $date = readline('Input new date (YYYY-MM-DD): ');
+        if ('' != $date) {
+            $entry['date'] = $date;
+        }
+        MessageController::appointmentEditInfo('time');
+        $time = readline('Input new time: ');
+        if ('' != $time) {
+            $entry['time'] = $time;
+        }
+        $DB->edit($entry);
+        unset($DB);
+        App::keepRunning();
     }
 
     public static function delete() {

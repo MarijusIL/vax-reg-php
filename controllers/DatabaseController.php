@@ -31,7 +31,7 @@ class DatabaseController {
     public function edit($appUpd) {
         foreach ($this->data as $key => $entry) {
             if ($entry['id'] == $appUpd['id']) {
-                $entry[$key] = $appUpd;
+                $this->data[$key] = $appUpd;
             }
         }
         file_put_contents(DIR . '\data\appointments.json', json_encode($this->data));
