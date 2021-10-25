@@ -2,7 +2,8 @@
     "autoload": {
         "psr-4": {
             "Marijus\\VaxReg\\": "",
-            "Marijus\\VaxReg\\Controllers\\": "controllers/"
+            "Marijus\\VaxReg\\Controllers\\": "controllers/",
+            "Marijus\\VaxReg\\Models\\": "models/"
         }
     }
 }
