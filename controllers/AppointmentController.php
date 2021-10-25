@@ -123,7 +123,7 @@ class AppointmentController {
             $entry['date'] = $date;
         }
         MessageController::appointmentEditInfo('time');
-        $time = readline('Input new time: ');
+        $time = readline('Input new time (23:59 format): ');
         if ('' != $time) {
             $entry['time'] = $time;
         }
@@ -134,10 +134,26 @@ class AppointmentController {
 
     public static function delete() {
         $DB = DatabaseController::get();
+        MessageController::appointmentDeleteInfo();
+        $wantedID = readline('Input ID: ');
+        $DB->delete($wantedID);
+        unset($DB);
+        App::keepRunning();
     }
 
     public static function show() {
         $DB = DatabaseController::get();
+        MessageController::appointmentPrint();
+        $date = readline('Input date: ');
+        $list = $DB->print($date);
+        foreach ($list as $entry) {
+            MessageController::printDiv();
+            foreach ($entry as $key => $value) {
+                MessageController::appointmentPrintInfo($key, $value);
+            }
+        }
+        unset($DB);
+        App::keepRunning();
     }
 
 

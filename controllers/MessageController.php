@@ -77,8 +77,13 @@ class MessageController {
         }
     }
     public static function appointmentDeleteInfo() {
-
+        echo 'Please provide the ID of the appointment you wish to delete.' . "\r\n";
     }
+
+    public static function appointmentPrint() {
+        echo 'Please provide the date to see all scheduled appointments.'  . "\r\n";
+    }
+    
     public static function appointmentPrintInfo($field, $value) {
         echo "$field: $value"  . "\r\n";
     }

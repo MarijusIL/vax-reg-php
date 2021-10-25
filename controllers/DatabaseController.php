@@ -32,6 +32,7 @@ class DatabaseController {
         foreach ($this->data as $key => $entry) {
             if ($entry['id'] == $appUpd['id']) {
                 $this->data[$key] = $appUpd;
+                break;
             }
         }
         file_put_contents(DIR . '\data\appointments.json', json_encode($this->data));
@@ -40,20 +41,22 @@ class DatabaseController {
     public function delete($appID) {
         foreach ($this->data as $key => $entry) {
             if ($entry['id'] == $appID) {
-                unset($entry[$key]);
+                unset($this->data[$key]);
+                break;
             }
         }
+        file_put_contents(DIR . '\data\appointments.json', json_encode($this->data));
     }
 
     public function print($date) {
         $list = [];
         foreach ($this->data as $key => $entry) {
-            if ($entry['date' == $date]) {
+            if ($entry['date'] == $date) {
                 $list[] = $entry;
             }
         }
-        foreach (range(0, count($list)- 2) as $i) {
-            foreach (range($i + 1, count($list - 1)) as $j) {
+        foreach (range(0, count($list) - 2) as $i) {
+            foreach (range(($i + 1), count($list) - 1) as $j) {
                 $iTime = $list[$i]['time'];
                 $iTime = explode(':', $iTime);
                 $iTime = (int) ($iTime[0] . $iTime[1]);
