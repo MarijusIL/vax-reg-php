@@ -14,26 +14,33 @@ class App {
         $line = readline('Enter command: ');
         self::router($line);
     }
+    public static function keepRunning() {
+        MessageController::enquire();
+        $line = readline('Enter command: ');
+        self::router($line);
+    }
 
     public static function getRoutes() {
         return self::$routes;
     }
 
     public static function router(string $route) {
-        if ($route === '!help') {
+        if ('!help' === $route) {
             MessageController::printMenu(self::$routes);
-        } elseif ($route === '!add') {
-
-        } elseif ($route === '!edit') {
-            
-        } elseif ($route === '!delete') {
-            
-        } elseif ($route === '!print') {
-            
-        } elseif ($route === '!quit') {
-
+            self::keepRunning();
+        } elseif ('!add' === $route) {
+            AppointmentController::create();
+        } elseif ('!edit' === $route) {
+            AppointmentController::update();
+        } elseif ('!delete' === $route) {
+            AppointmentController::delete();
+        } elseif ('!print' === $route) {
+            AppointmentController::show();
+        } elseif ('!quit' === $route) {
+            MessageController::bye();
         } else {
-            
+            MessageController::error('invalid-route');
+            self::keepRunning();
         }
     }
 }

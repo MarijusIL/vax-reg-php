@@ -1,25 +1,32 @@
 <?php
 namespace Marijus\VaxReg\Models;
 
+Use Marijus\VaxReg\Controllers\DatabaseController;
+
 class Appointment {
     private static $nextID;
     private int $id;
     private string $name;
+    private string $email;
     private string $phoneNumber;
     private int $nationalID;
     private string $date;
     private string $time;
 
     public function __construct(string $nameIn,
+                                string $emailIn,
                                 string $phoneNumberIn,
                                 int $nationalIDIn,
                                 string $dateIn,
                                 string $timeIn) {
         if (!isset(self::$nextID)) {
             self::$nextID = 1;
+        } else {
+            self::$nextID = DatabaseController::get()->getNextId();
         }
-        $this->id = self::$nextID++;
+        $this->id = self::$nextID;
         $this->name = $nameIn;
+        $this->email = $emailIn;
         $this->phoneNumber = $phoneNumberIn;
         $this->nationalID = $nationalIDIn;
         $this->date = $dateIn;
