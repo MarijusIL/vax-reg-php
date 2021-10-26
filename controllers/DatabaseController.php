@@ -74,6 +74,9 @@ class DatabaseController {
     }
 
     public function getNextId() {
+        if (count($this->data) == 0) {
+            return 1;
+        }
        return ($this->data[count($this->data)-1]['id']) + 1;
     }
 
