@@ -74,7 +74,7 @@ class DatabaseController {
     }
 
     public function getNextId() {
-        return count($this->data) + 1;
+       return ($this->data[count($this->data)-1]['id']) + 1;
     }
 
     public function getAppByID($appID) {
